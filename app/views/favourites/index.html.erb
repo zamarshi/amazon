@@ -1,0 +1,7 @@
+<h1>Favourites</h1>
+
+<% @favourites.each do |f|%>
+  <% q = f.product %>
+  <h2><%= link_to q.title, product_path(q) %></h2>
+  <hr>
+<%end%>

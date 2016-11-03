@@ -1,0 +1,10 @@
+<h1>All Products in <%= @tag.name %></h1>
+
+<%products = @tag.products %>
+
+<% products.each do |p|%>
+<div>
+  <h2><%= link_to p.title, product_path(p) %></h2>
+  <hr>
+</div>
+<%end%>

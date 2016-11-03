@@ -1,0 +1,40 @@
+<h1>New Product</h1>
+
+
+<%= @product.errors.full_messages.join(", ")%>
+<%= form_for  @product do |f| %>
+
+  <div>
+
+<%= f.label :category %>
+<%= f.collection_select :category_id, Category.all, :id, :title %>
+
+    <%=f.label :title %>
+    <%=f.text_field :title %>
+  </div>
+
+
+  <div>
+    <%=f.label :description %>
+    <%=f.text_area :description %>
+  </div>
+  <div>
+    <%=f.label :price %>
+    <%=f.text_field :price %>
+  </div>
+<br>
+  <div>
+      <%= f.collection_select(
+        :tag_ids, Tag.all, :id, :name, {},
+        { multiple: true, class: 'chosen-select' }
+      ) %>
+  </div>
+
+
+
+  <%= f.submit %>
+<% end %>
+
+<script>
+  $('.chosen-select').chosen({ width: '300px' });
+</script>
