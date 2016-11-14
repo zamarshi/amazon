@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'rack-cors'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -32,6 +33,7 @@ gem 'chosen-rails'
 gem 'cowsay'
 
 gem 'faker'
+
 
 gem 'cancancan'
 

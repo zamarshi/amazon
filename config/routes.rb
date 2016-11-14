@@ -30,11 +30,23 @@ Rails.application.routes.draw do
 
 root 'home#index'
 
-resources :users, only: [:new, :create]
+  namespace :admin do
+    resources :products
+  end
 
-resources :sessions, only: [:new, :create, :destroy] do
-  delete :destroy, on: :collection #this skips having an :id in the url
-end
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :products, only: [:index, :show, :create]
+    end
+  end
+
+
+
+  resources :users, only: [:new, :create]
+
+  resources :sessions, only: [:new, :create, :destroy] do
+    delete :destroy, on: :collection #this skips having an :id in the url
+  end
 
   resources :products, shallow: true do
     resources :favourites, only: [:create, :destroy]

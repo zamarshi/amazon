@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-before_action :authenticate_user
+  before_action :authenticate_user, except: [:index, :show]
   def new
     @product = Product.new
     @category = Category.new
@@ -21,10 +21,22 @@ before_action :authenticate_user
   def show
     @product = Product.find params[:id]
     @review = Review.new
+    respond_to do |format|
+      format.html { render }
+      format.text { render }
+      format.xml  { render xml: @product }
+      format.json { render json: @product.to_json(include: :reviews) }
+    end
   end
 
   def index
     @products = Product.order(created_at: :desc)
+    respond_to do |format|
+      format.html { render }
+      format.text { render }
+      format.xml  { render xml: @products }
+      format.json { render json: @products.to_json }
+    end
   end
 
   def edit

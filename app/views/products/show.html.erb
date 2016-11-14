@@ -1,7 +1,7 @@
 <% user = @product.user %>
 <h2><%= @product.title %></h2>
 <p><%= @product.description %></p>
-<p> &#36; <%= (@product.price).to_f.round(2) %></p>
+<p> $<%= (@product.price).to_f %></p>
 <p> Created By: <%= user.first_name %>
 <%= link_to "Edit", edit_product_path(@product)%>
 <%= link_to "Delete", product_path(@product),
@@ -19,42 +19,17 @@
   Tags: <%= @product.tags.map(&:name).join(', ') %>
 </section>
 
-<h4> <%= @review.errors.full_messages.join(', ') %> </h4>
 
-<%= form_for [@product, @review] do |r| %>
-<div>
-    <%= r.label 'Submit A Review:' %>
-    <%= r.text_area :body %>
-
-    <%= r.label :star_count %>
-    <%= r.text_field :star_count %>
-
-  </div>
-  <%= r.submit %>
-<% end %>
+<div id="review-form">
+<%= render '/reviews/form' %>
+</div>
 
 
 
-<% @product.reviews.each do |r| %>
-  Review Created By: <%= user.first_name %>
-  <%= r.body %> | <% (r.star_count.to_i).times do %>
-  <%= "✨" %>
+<%# These are the listed reviews  %>
+<div id="reviews">
+  <% @product.reviews.each do |r| %>
+  <%= render('/reviews/review', {r: r}) %>
+
   <% end %>
-
-  <%like = r.likes.find_by(user: current_user)%>
-  <% if like.present? %>
-    <%= link_to "Unlike", like_path(like), method: :delete %>
-  <% else %>
-    <%= link_to "Like", review_likes_path(r), method: :post %>
-  <% end %>
-
-  (<%=pluralize r.likes.count, "Like" %>)
-
-  <%= link_to 'delete', review_path(r),
-                        method: :delete,
-                        data: { confirm: 'are you sure?' } %>
-
-
-
-  <hr>
-<% end %>
+</div>

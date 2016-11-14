@@ -1,0 +1,13 @@
+<h4> <%= @review.errors.full_messages.join(', ') %> </h4>
+
+<%= form_for [@product, @review], remote: true do |r| %>
+<div>
+    <%= r.label 'Submit A Review:' %>
+    <%= r.text_area :body %>
+
+    <%= r.label :star_count %>
+    <%= r.text_field :star_count %>
+
+  </div>
+  <%= r.submit %>
+<% end %>

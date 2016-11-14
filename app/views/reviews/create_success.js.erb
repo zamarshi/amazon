@@ -1,0 +1,4 @@
+$("#reviews").prepend("<%= j(render('/reviews/review', {r: @review})) %>");
+
+<% @review = Review.new %>
+$('#review-form').html('<%= j render 'form' %>');

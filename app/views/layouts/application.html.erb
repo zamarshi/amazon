@@ -3,7 +3,6 @@
   <head>
     <title>Amazon</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -12,45 +11,43 @@
     float: left;
     padding: 10px;
     width: 100%;
+    color: pink;
   }
-  #nav-bar {
-    float: left;
-  }
+
+
+
   </style>
   </head>
 
-  <body>
-  <nav>
-    <div id="nav-bar">
-    <!-- <a href="/">Home</a> -->
-    <%= link_to 'Home', root_path %>
-    |
-    <%= link_to 'About', about_path %>
-    |
-    <%= link_to 'Contact Us', contact_path %>
-    |
-    <%= link_to 'New Products', new_product_path %>
-    |
-    <%= link_to 'All Products', products_path %>
-    |
-    <%= link_to 'All Tags', tags_path %>
-    |
-    <% if session[:user_id].present? %>
-      Hello <%= current_user.first_name %>
-      |
-      <%= link_to 'Favourites', favourites_path %>
-      |
-      <%= link_to 'Sign out', sessions_path, method: :delete %>
-    <% else %>
-    <%= link_to 'Sign Up', new_user_path %>
-    |
-      <%= link_to 'Sign In', new_session_path %>
-    <% end %>
-    </div>
-  </nav>
-  <br>
-  <br>
-  <hr>
-    <%= yield %>
-  </body>
-</html>
+  <body class="container">
+
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+
+
+
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'About', about_path %></li>
+          <li>  <%= link_to 'Contact Us', contact_path %></li>
+          <li>   <%= link_to 'New Products', new_product_path %></li>
+          <li>  <%= link_to 'All Products', products_path %></li>
+        </ul>
+
+
+        <ul class="nav navbar-nav navbar-right">
+          <% if session[:user_id].present? %>
+          <li> <%= link_to 'Hello ' + current_user.first_name, favourites_path %></li>
+          <li>  <%= link_to 'Favourites', favourites_path %></li>
+          <li style="color: white"> <%= link_to 'Sign out', sessions_path, method: :delete %></li>
+          <% else %>
+          <li><span class="glyphicon glyphicon-user"></span> <%= link_to 'Sign Up', new_user_path %>        </li>
+          <li><span class="glyphicon glyphicon-log-in"></span> <%= link_to 'Sign In', new_session_path %> </li>
+        </ul>
+        <% end %>
+      </div>
+    </nav>
+        <%= yield %>
+    </body>
+  </html>

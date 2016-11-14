@@ -1,0 +1,11 @@
+<div class="likes">
+<%like = r.likes.find_by(user: current_user)%>
+
+<% if like.present? %>
+  <%= link_to "Unlike", like_path(like), remote: true, method: :delete %>
+<% else %>
+  <%= link_to "Like", review_likes_path(r), remote: true, method: :post %>
+<% end %>
+
+(<%=pluralize r.likes.count, "Like" %>)
+</div>

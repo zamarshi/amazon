@@ -1,0 +1,19 @@
+<div id="<%= dom_id(r)%>">
+
+  Review Created By: <%= r.user.first_name %>
+  <%= r.body %> | <% (r.star_count.to_i).times do %>
+  <%= "✨" %>
+  <% end %>
+
+
+
+
+
+  <%= link_to 'delete', review_path(r),
+                        method: :delete,
+                        remote: true,
+                        data: { confirm: 'are you sure?' } %>
+
+
+  <%= render('/likes/like', {r: r}) %>
+</div>
